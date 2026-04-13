@@ -31,6 +31,11 @@
   <!-- Build: Configuring plugins and build settings -->
 <build>
 <plugins>
+ <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.6.3</version>
+        </plugin>
 <!-- Example: Maven Compiler Plugin to compile Java code -->
 <plugin>
 <groupId>org.apache.maven.plugins</groupId>

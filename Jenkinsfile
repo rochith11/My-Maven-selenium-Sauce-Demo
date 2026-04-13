@@ -14,7 +14,8 @@ pipeline {
 
         stage('Build & Test') {
             steps {
-                sh 'mvn clean package'
+            	sh 'ls target/classes/com/example/'
+                sh 'mvn clean compile'
             }
         }
 
