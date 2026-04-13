@@ -12,23 +12,29 @@ pipeline {
             }
         }
 
-        stage('Build & Test') {
+        stage('Build') {
             steps {
-            	sh 'ls target/classes/com/example/'
-                sh 'mvn clean compile'
+                sh 'rm -f dependency-reduced-pom.xml || true'
+                sh 'mvn clean compile dependency:copy-dependencies'
+            }
+        }
+
+        stage('Verify Build') {
+            steps {
+                sh 'ls target/classes/com/example/'
             }
         }
 
         stage('Run Application') {
             steps {
-                sh 'mvn clean compile exec:java -Dexec.mainClass=com.example.App -Dexec.classpathScope=compile'
+                sh 'java -cp target/classes:target/dependency/* com.example.App'
             }
         }
     }
 
     post {
         success {
-            echo 'Build and deployment successful!'
+            echo 'Build and execution successful!'
         }
         failure {
             echo 'Build failed!'
