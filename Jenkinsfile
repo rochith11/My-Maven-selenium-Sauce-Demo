@@ -12,6 +12,13 @@ pipeline {
                 git branch: 'master', url: 'https://github.com/rochith11/My-Maven-selenium-Sauce-Demo.git'
             }
         }
+         stage('Check Versions') {
+            steps {
+                sh 'java -version'
+                sh 'echo $JAVA_HOME'
+                sh 'mvn -version'
+            }
+        }
 
         stage('Build') {
             steps {
